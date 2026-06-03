@@ -60,11 +60,11 @@
 
     .hero {
       position: relative;
-      min-height: 82vh;
+      min-height: auto;
       display: grid;
       place-items: center;
       overflow: hidden;
-      padding: 76px 22px 52px;
+      padding: clamp(58px, 7vw, 82px) 22px clamp(58px, 6vw, 78px);
       color: var(--white);
       background:
         linear-gradient(135deg, rgba(11, 61, 46, 0.97), rgba(19, 138, 94, 0.86)),
@@ -85,12 +85,16 @@
     .hero::after {
       content: "";
       position: absolute;
-      inset: auto -8% -120px -8%;
-      height: 250px;
-      background: var(--paper);
-      transform: rotate(-2.2deg);
-      transform-origin: left top;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--leaf), var(--jade), var(--gold));
+      transform: none;
+      transform-origin: center;
+      border-top: 0;
+      z-index: 1;
+      pointer-events: none;
     }
 
     .hero-visual {
@@ -98,6 +102,7 @@
       inset: 0;
       pointer-events: none;
       opacity: 0.95;
+      z-index: 0;
     }
 
     .paper-sheet,
@@ -270,6 +275,7 @@
       line-height: 1.02;
       font-weight: 900;
       letter-spacing: 0;
+      text-wrap: balance;
     }
 
     .hero-subtitle {
@@ -277,13 +283,14 @@
       margin: 24px auto 0;
       color: rgba(255, 255, 255, 0.86);
       font-size: clamp(1rem, 1.5vw, 1.32rem);
+      text-wrap: balance;
     }
 
     .hero-meta {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
-      margin: 34px auto 0;
+      margin: 30px auto 0;
       width: min(920px, 100%);
     }
 
@@ -310,12 +317,22 @@
       font-weight: 700;
     }
 
+    .members-title {
+      margin: 24px 0 0;
+      color: var(--gold);
+      font-size: 0.88rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
     .members {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 26px;
+      gap: 12px;
+      width: min(100%, 920px);
+      margin: 10px auto 0;
       padding: 0;
       list-style: none;
     }
@@ -327,6 +344,10 @@
       background: rgba(255, 255, 255, 0.12);
       color: var(--white);
       font-weight: 700;
+      max-width: 100%;
+      text-align: center;
+      overflow-wrap: anywhere;
+      line-height: 1.25;
     }
 
     .top-nav {
@@ -901,7 +922,7 @@
 
     @media (max-width: 900px) {
       .hero {
-        min-height: 76vh;
+        padding-bottom: 58px;
       }
 
       .executive-grid,
@@ -938,7 +959,11 @@
       }
 
       .hero {
-        padding-top: 52px;
+        padding: 46px 16px 56px;
+      }
+
+      .hero-content {
+        width: 100%;
       }
 
       h1 {
@@ -960,14 +985,15 @@
       }
 
       .hero-meta {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: 1fr;
         gap: 8px;
         margin-top: 22px;
       }
 
       .meta-item {
-        min-height: 86px;
+        min-height: auto;
         padding: 12px;
+        text-align: center;
       }
 
       .meta-item span {
@@ -975,8 +1001,12 @@
       }
 
       .members {
-        margin-top: 16px;
-        gap: 7px;
+        grid-template-columns: 1fr;
+        width: min(100%, 360px);
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 8px;
+        gap: 8px;
       }
 
       .members li {
@@ -1009,7 +1039,9 @@
       }
 
       .hero::after {
-        bottom: -245px;
+        height: 7px;
+        bottom: 0;
+        transform: none;
       }
 
       th,
@@ -1113,6 +1145,7 @@
         </div>
       </div>
 
+      <p class="members-title">Integrantes</p>
       <ul class="members" aria-label="Integrantes">
         <li>Nefthali Cruz</li>
         <li>Sergio Hernández</li>
